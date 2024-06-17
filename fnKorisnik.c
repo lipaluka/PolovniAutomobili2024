@@ -175,20 +175,29 @@ void pretraziAute() {
 	fclose(auti);
 }
 
-void pretragaPoKaroseriji(AUTO* mobil, int broj, const char* karoserija) {
-	int found = 0;
-	for (int i = 0; i < broj; i++) {
-		if (strcmp(mobil[i].karoserija, karoserija) == 0) {
-			printf("ID: %d\nMarka: %s\nModel: %s\nKaroserija: %s\nPogon: %s\nMotor: %s\nBoja: %s\nKonji: %d\nNewtonm: %d\nKilometraza: %d\nGodiste: %d\nCijena: %d(EUR)\n\n",
-				mobil[i].id, mobil[i].marka, mobil[i].model, mobil[i].karoserija,
-				mobil[i].pogon, mobil[i].motor, mobil[i].boja, mobil[i].konji,
-				mobil[i].newtonm, mobil[i].kilometraza, mobil[i].godiste, mobil[i].cijena);
-			found = 1;
+void pretragaPoKaroseriji(AUTO* mobil, int broj) {
+	int found;
+	char karoserija[50];
+
+	do {
+		found = 0;
+		printf("Unesite karoseriju: ");
+		scanf("%s", karoserija);
+
+		for (int i = 0; i < broj; i++) {
+			if (strcmp(mobil[i].karoserija, karoserija) == 0) {
+				printf("ID: %d\nMarka: %s\nModel: %s\nKaroserija: %s\nPogon: %s\nMotor: %s\nBoja: %s\nKonji: %d\nNewtonm: %d\nKilometraza: %d\nGodiste: %d\nCijena: %d(EUR)\n\n",
+					mobil[i].id, mobil[i].marka, mobil[i].model, mobil[i].karoserija,
+					mobil[i].pogon, mobil[i].motor, mobil[i].boja, mobil[i].konji,
+					mobil[i].newtonm, mobil[i].kilometraza, mobil[i].godiste, mobil[i].cijena);
+				found = 1;
+			}
 		}
-	}
-	if (!found) {
-		printf("Nema automobila sa karoserijom: %s\n", karoserija);
-	}
+
+		if (!found) {
+			printf("Nema automobila sa karoserijom: %s. Molimo pokušajte ponovo.\n", karoserija);
+		}
+	} while (!found);
 }
 
 
@@ -219,7 +228,7 @@ void kupovinaAutomobila() {
 	char buffer[256];
 	int currentID = 1;
 
-	// Provjeri i potvrdi kupovinu
+	
 	for (int i = 0; i < broj; i++) {
 		if (mobil[i].id == kupovinaID) {
 			found = 1;
@@ -230,6 +239,7 @@ void kupovinaAutomobila() {
 
 			if (strcmp(potvrda, "da") != 0) {
 				found = 0;
+				exit(0);
 			}
 			else {
 				printf("Automobil sa ID %d je kupljen.\n", kupovinaID);
@@ -238,7 +248,7 @@ void kupovinaAutomobila() {
 		}
 	}
 
-	// Ako je automobil pronaðen i kupovina potvrðena, kopiraj u privremenu datoteku
+	
 	if (found) {
 		for (int i = 0; i < broj; i++) {
 			if (mobil[i].id != kupovinaID) {
@@ -252,6 +262,7 @@ void kupovinaAutomobila() {
 	}
 	else {
 		printf("Automobil sa ID %d nije pronadjen ili kupovina nije potvrdjena.\n", kupovinaID);
+		return kupovinaAutomobila();
 	}
 
 	fclose(auti);

@@ -33,7 +33,7 @@ int izborAdmin() {
 		printf("Pogresno ime ili lozinka, pokusajte ponovno!!\n");
 		if (pokusaji == 3) {
 			printf("Iskoristili ste sve pokusaje, pokusajte ponovno kasnije\n");
-			return 1;
+			exit(0);
 		}
 	}
 

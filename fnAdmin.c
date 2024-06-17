@@ -245,6 +245,7 @@ void obrisiAuto() {
 
 
 
+
 void urediAuto() {
     FILE* auti = fopen("auti.txt", "r");
     if (auti == NULL) {
@@ -291,7 +292,7 @@ void urediAuto() {
         fscanf(auti, "%d", &mobil.cijena);
         fgetc(auti);
 
-        mobil.id = id;  
+        mobil.id = id;
 
         if (id == idedit) {
             found = 1;
@@ -312,38 +313,41 @@ void urediAuto() {
                 CIJ
             };
             enum edit izborPolja;
-            char unos[15];
-            scanf("%s", unos);
-            getchar();
-            if (strcmp(unos, "marka") == 0)
-                izborPolja = MARKA;
-            else if (strcmp(unos, "model") == 0)
-                izborPolja = MODEL;
-            else if (strcmp(unos, "karoserija") == 0)
-                izborPolja = KAROSERIJA;
-            else if (strcmp(unos, "pogon") == 0)
-                izborPolja = POGON;
-            else if (strcmp(unos, "motor") == 0)
-                izborPolja = MOTOR;
-            else if (strcmp(unos, "boja") == 0)
-                izborPolja = BOJA;
-            else if (strcmp(unos, "ks") == 0)
-                izborPolja = KS;
-            else if (strcmp(unos, "nm") == 0)
-                izborPolja = NM;
-            else if (strcmp(unos, "km") == 0)
-                izborPolja = KM;
-            else if (strcmp(unos, "god") == 0)
-                izborPolja = GOD;
-            else if (strcmp(unos, "cij") == 0)
-                izborPolja = CIJ;
-            else {
-                printf("Krivi izbor\n");
-                fclose(auti);
-                fclose(temp);
-                remove("temp.txt");
-                return urediAuto();
+            int validInput = 0;
+
+            while (!validInput) {
+                char unos[15];
+                scanf("%s", unos);
+                getchar();
+                if (strcmp(unos, "marka") == 0)
+                    izborPolja = MARKA;
+                else if (strcmp(unos, "model") == 0)
+                    izborPolja = MODEL;
+                else if (strcmp(unos, "karoserija") == 0)
+                    izborPolja = KAROSERIJA;
+                else if (strcmp(unos, "pogon") == 0)
+                    izborPolja = POGON;
+                else if (strcmp(unos, "motor") == 0)
+                    izborPolja = MOTOR;
+                else if (strcmp(unos, "boja") == 0)
+                    izborPolja = BOJA;
+                else if (strcmp(unos, "ks") == 0)
+                    izborPolja = KS;
+                else if (strcmp(unos, "nm") == 0)
+                    izborPolja = NM;
+                else if (strcmp(unos, "km") == 0)
+                    izborPolja = KM;
+                else if (strcmp(unos, "god") == 0)
+                    izborPolja = GOD;
+                else if (strcmp(unos, "cij") == 0)
+                    izborPolja = CIJ;
+                else {
+                    printf("Krivi izbor, pokusajte ponovo: ");
+                    continue;
+                }
+                validInput = 1;
             }
+
             switch (izborPolja) {
             case MARKA:
                 printf("Unesi novu marku: ");
@@ -405,7 +409,7 @@ void urediAuto() {
                 do {
                     printf("Unesi novi broj konjskih snaga: ");
                     if (scanf("%d", &mobil.konji) != 1) {
-                        while (getchar() != '\n'); 
+                        while (getchar() != '\n');
                         printf("Neispravan unos! Unesite broj.\n");
                         continue;
                     }
@@ -417,7 +421,7 @@ void urediAuto() {
                 do {
                     printf("Unesi novi broj newtonmetara: ");
                     if (scanf("%d", &mobil.newtonm) != 1) {
-                        while (getchar() != '\n'); 
+                        while (getchar() != '\n');
                         printf("Neispravan unos! Unesite broj.\n");
                         continue;
                     }
@@ -429,11 +433,11 @@ void urediAuto() {
                 do {
                     printf("Unesi novu kilometrazu: ");
                     if (scanf("%d", &mobil.kilometraza) != 1) {
-                        while (getchar() != '\n'); 
+                        while (getchar() != '\n');
                         printf("Neispravan unos! Unesite broj.\n");
                         continue;
                     }
-                    if (mobil.kilometraza >= 0) break;
+                    if (mobil.kilometraza >= 0 && mobil.kilometraza <= 3000000) break;
                     printf("Neispravan unos! Provjerite unesene vrijednosti.\n");
                 } while (1);
                 break;
@@ -441,7 +445,7 @@ void urediAuto() {
                 do {
                     printf("Unesi novo godiste: ");
                     if (scanf("%d", &mobil.godiste) != 1) {
-                        while (getchar() != '\n'); 
+                        while (getchar() != '\n');
                         printf("Neispravan unos! Unesite broj.\n");
                         continue;
                     }
@@ -453,7 +457,7 @@ void urediAuto() {
                 do {
                     printf("Unesi novu cijenu: ");
                     if (scanf("%d", &mobil.cijena) != 1) {
-                        while (getchar() != '\n'); // Clear invalid input
+                        while (getchar() != '\n');
                         printf("Neispravan unos! Unesite broj.\n");
                         continue;
                     }
@@ -467,7 +471,6 @@ void urediAuto() {
             }
         }
 
-      
         fprintf(temp, "%d\n%s\n%s\n%s\n%s\n%s\n%s\n%d\n%d\n%d\n%d\n%d\n",
             mobil.id, mobil.marka, mobil.model, mobil.karoserija, mobil.pogon,
             mobil.motor, mobil.boja, mobil.konji, mobil.newtonm, mobil.kilometraza, mobil.godiste, mobil.cijena);

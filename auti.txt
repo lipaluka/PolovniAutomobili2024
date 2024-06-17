@@ -3,22 +3,34 @@ Audi
 A4
 limuzina
 prednji
-2.0TDI
+2.0d I4
 srebrna
 204
 400
-247000
+246000
 2009
 14000
 2
 BMW
-X5
-suv
-4x4
-3.0d
-siva
-250
+M3
+coupe
+zadnji
+3.2i I6
+zuta
+338
+365
+222000
+2001
+44000
+3
+BMW
+3xxi
+coupe
+zadnji
+5.0i V10
+crvena
 550
-314000
-2011
-12000
+620
+23000
+1994
+15000

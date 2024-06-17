@@ -131,10 +131,7 @@ void izborKorisnik() {
 		break;
 	case KAROSERIJA:
 		scanAuto(&mobil, &broj);
-		printf("Unesi karoseriju koju zelis pretraziti: ");
-		scanf("%14s", karoserija);
-		printf("Svi automobili karoserije %s:\n", karoserija);
-		pretragaPoKaroseriji(mobil, broj, karoserija);
+		pretragaPoKaroseriji(mobil, broj);
 		free(mobil);
 		break;
 	case KUPOVINA:
